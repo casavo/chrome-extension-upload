@@ -2,14 +2,18 @@ import * as core from '@actions/core'
 import fs from 'fs'
 import glob from 'glob'
 
-function uploadFile(webStore: any, filePath: string): void {
+function uploadFile(
+  webStore: any,
+  filePath: string,
+  publishTarget: string
+): void {
   const myZipFile = fs.createReadStream(filePath)
   webStore
     .uploadExisting(myZipFile)
     .then((uploadRes: any) => {
       core.debug(uploadRes)
       webStore
-        .publish()
+        .publish(publishTarget)
         .then((publishRes: any) => {
           core.debug(publishRes)
         })
@@ -35,6 +39,7 @@ async function run(): Promise<void> {
     const clientId = core.getInput('client-id', {required: true})
     const clientSecret = core.getInput('client-secret', {required: true})
     const refreshToken = core.getInput('refresh-token', {required: true})
+    const publishTarget = core.getInput('publish-token', {required: true})
     const globFlg = core.getInput('glob') as 'true' | 'false'
 
     const webStore = require('chrome-webstore-upload')({
@@ -47,12 +52,12 @@ async function run(): Promise<void> {
     if (globFlg === 'true') {
       const files = glob.sync(filePath)
       if (files.length > 0) {
-        uploadFile(webStore, files[0])
+        uploadFile(webStore, files[0], publishTarget)
       } else {
         core.setFailed('No files to match.')
       }
     } else {
-      uploadFile(webStore, filePath)
+      uploadFile(webStore, filePath, publishTarget)
     }
   } catch (error) {
     core.setFailed(error.message)
