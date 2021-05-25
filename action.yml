@@ -1,28 +1,31 @@
-name: 'Chrome extension upload action'
-description: 'upload & publish extensions to the Chrome Web Store'
-author: 'mnao305'
+name: "Chrome extension upload action"
+description: "upload & publish extensions to the Chrome Web Store"
+author: "mnao305"
 branding:
   color: blue
   icon: upload-cloud
 inputs:
   file-path:
-    description: 'path & filename to a zip file'
+    description: "path & filename to a zip file"
     required: true
   extension-id:
-    description: 'extension id'
+    description: "extension id"
     required: true
   client-id:
-    description: 'client id'
+    description: "client id"
     required: true
   client-secret:
-    description: 'client secret'
+    description: "client secret"
     required: true
   refresh-token:
-    description: 'refresh token'
+    description: "refresh token"
     required: true
   glob:
-    description: 'if true the file can be a glob pattern'
+    description: "if true the file can be a glob pattern"
     default: false
+  publish-target:
+    description: "publish target"
+    required: true
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"

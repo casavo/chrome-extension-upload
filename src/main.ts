@@ -39,7 +39,7 @@ async function run(): Promise<void> {
     const clientId = core.getInput('client-id', {required: true})
     const clientSecret = core.getInput('client-secret', {required: true})
     const refreshToken = core.getInput('refresh-token', {required: true})
-    const publishTarget = core.getInput('publish-token', {required: true})
+    const publishTarget = core.getInput('publish-target', {required: true})
     const globFlg = core.getInput('glob') as 'true' | 'false'
 
     const webStore = require('chrome-webstore-upload')({
