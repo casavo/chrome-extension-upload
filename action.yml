@@ -25,7 +25,7 @@ inputs:
     default: false
   publish-target:
     description: "publish target"
-    required: true
+    default: "default"
 runs:
   using: "node12"
   main: "dist/index.js"

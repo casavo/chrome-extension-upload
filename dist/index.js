@@ -1769,7 +1769,7 @@ function run() {
             const clientId = core.getInput('client-id', { required: true });
             const clientSecret = core.getInput('client-secret', { required: true });
             const refreshToken = core.getInput('refresh-token', { required: true });
-            const publishTarget = core.getInput('publish-target', { required: true });
+            const publishTarget = core.getInput('publish-target');
             const globFlg = core.getInput('glob');
             const webStore = __webpack_require__(673)({
                 extensionId,
